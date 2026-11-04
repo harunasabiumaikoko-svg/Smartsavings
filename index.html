@@ -8,7 +8,7 @@
 :root{--green:#087b55;--deep:#07543d;--mint:#e9f7f0;--gold:#e8b84b;--ink:#17251f;--muted:#718078;--line:#e5eee8;--bg:#f5f8f6;--white:#fff;--red:#c94b4b}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
 header{background:linear-gradient(115deg,var(--deep),#0c8b61);color:white;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-size:25px;font-weight:900;letter-spacing:2px}.brand span{color:#f5d17a}
+.brand{font-size:25px;font-weight:900;letter-spacing:2px;cursor:pointer}.brand span{color:#f5d17a}
 nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--green);color:white}
 button.secondary{background:white;color:var(--deep);border:1px solid #dce9e1}button.gold{background:var(--gold);color:#35280b}
 .hero{padding:55px 6%;background:linear-gradient(120deg,#e7f6ed,#f8fbf8);display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
@@ -19,7 +19,7 @@ button.secondary{background:white;color:var(--deep);border:1px solid #dce9e1}but
 main{max-width:1160px;margin:28px auto;padding:0 18px}.screen{display:none}.screen.active{display:block}
 .panel{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 28px #163d2410}
 .form-wrap{max-width:620px;margin:25px auto}.form-wrap h2{margin:0 0 7px}.sub{color:var(--muted);line-height:1.5;margin-top:0}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#43564b}input,select{width:100%;padding:13px;border:1px solid #dce7df;border-radius:10px;font-size:15px;background:#fff}input:focus{outline:2px solid #a8dec3;border-color:var(--green)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#43564b}input,select{width:100%;padding:13px;border:1px solid #dce7df;border-radius:10px;font-size:15px;background:#fff}
 .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.notice{background:#fff8e6;border:1px solid #f2dfaa;color:#70551a;padding:12px;border-radius:10px;font-size:13px;line-height:1.5;margin:15px 0}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{background:white;padding:18px;border-radius:15px;border:1px solid var(--line)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:8px;color:var(--deep)}
 .topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.days button{border:0;cursor:pointer}.days button.done{background:#c8edda}.days button.today{background:var(--gold);color:#382b0b}
@@ -31,19 +31,18 @@ footer{text-align:center;color:var(--muted);padding:28px;font-size:12px}
 </head>
 <body>
 <header>
- <div class="brand">ADA<span>SHE</span></div>
+ <div class="brand" id="logo" onclick="logoClick()">ADA<span>SHE</span></div>
  <nav>
   <button class="secondary" onclick="show('home')">Gida</button>
   <button class="secondary" onclick="show('register')">Register</button>
   <button class="secondary" onclick="show('login')">Login</button>
-  <button class="gold" onclick="show('admin')">Admin Demo</button>
  </nav>
 </header>
 <section id="home" class="screen active">
  <div class="hero">
   <div><div class="tag">Ajiya cikin sauƙi • Savings made simple</div>
    <h1>Ajiye kuɗinka cikin tsari.</h1>
-   <p>ADASHE yana taimaka maka ka bibiyi ajiyarka ta kwanaki 31 a kowane wata. Wannan samfurin gwaji ne domin nuna yadda shafin zai kasance.</p>
+   <p>ADASHE yana taimaka maka ka bibiyi ajiyarka ta kwanaki 31 a kowane wata.</p>
    <div class="actions"><button onclick="show('register')">Buɗe Account</button><button class="secondary" onclick="show('login')">Shiga Account</button></div>
   </div>
   <div class="preview-card"><h3>Katin ajiyar kwanaki 31</h3><div class="mini-grid" id="miniDays"></div><p class="sub">Ka duba ajiyarka a wuri guda.</p></div>
@@ -54,58 +53,89 @@ footer{text-align:center;color:var(--muted);padding:28px;font-size:12px}
 <section id="register" class="screen">
  <div class="panel form-wrap"><div class="tag">Mataki na 1 / 2</div><h2>Ƙirƙiri sabon account</h2><p class="sub">Cika bayananka domin buɗe asusun gwaji.</p>
  <div class="fields">
-  <div class="field"><label>Sunan Ƙarshe</label><input placeholder="Misali: Musa"></div>
-  <div class="field"><label>Sunan Farko</label><input placeholder="Misali: Haruna"></div>
-  <div class="field"><label>Lambar waya</label><input placeholder="080..."></div>
-  <div class="field"><label>Email</label><input type="email" placeholder="name@example.com"></div>
-  <div class="field"><label>Password</label><input type="password" placeholder="Ƙirƙiri password"></div>
-  <div class="field"><label>Tabbatar da Password</label><input type="password" placeholder="Sake rubuta password"></div>
+  <div class="field"><label>Sunan Ƙarshe</label><input id="rLast" placeholder="Misali: Musa"></div>
+  <div class="field"><label>Sunan Farko</label><input id="rFirst" placeholder="Misali: Haruna"></div>
+  <div class="field"><label>Lambar waya</label><input id="rPhone" placeholder="080..."></div>
+  <div class="field"><label>Email</label><input id="rEmail" type="email" placeholder="name@example.com"></div>
+  <div class="field"><label>Password</label><input id="rPass" type="password" placeholder="Ƙirƙiri password"></div>
+  <div class="field"><label>Tabbatar da Password</label><input id="rPass2" type="password" placeholder="Sake rubuta password"></div>
  </div>
- <div class="notice">Wannan demo ne: kada ka saka ainihin password, NIN, ko bayanan sirri. Ba a haɗa OTP na gaske ba.</div>
- <div class="actions"><button onclick="show('verify')">Next →</button><button class="secondary" onclick="show('login')">Ina da account</button></div>
+ <div class="notice">Wannan demo ne: kada ka saka ainihin password, NIN, ko bayanan sirri.</div>
+ <div class="actions"><button onclick="doRegister()">Next →</button><button class="secondary" onclick="show('login')">Ina da account</button></div>
  </div>
 </section>
 <section id="verify" class="screen">
- <div class="panel form-wrap"><div class="tag">Mataki na 2 / 2</div><h2>Tabbatar da bayanai</h2><p class="sub">A nan za a nuna yadda tabbatarwa zai kasance idan an haɗa tsarin tsaro na gaske.</p>
- <div class="field"><label>Lambar OTP (demo kawai)</label><input placeholder="Shigar da lambar gwaji"></div>
- <div class="notice">Ba a karɓar ko adana NIN ko hoton fuska a wannan demo. Idan za a ƙaddamar da ainihin sabis, sai an fara duba dokoki, izini, da amintaccen kamfanin tantancewa.</div>
- <div class="actions"><button onclick="show('dashboard')">Kammala demo →</button><button class="secondary" onclick="show('register')">Komawa</button></div>
+ <div class="panel form-wrap"><div class="tag">Mataki na 2 / 2</div><h2>Tabbatar da bayanai</h2><p class="sub">Shigar da OTP na gwaji: <b>1234</b></p>
+ <div class="field"><label>Lambar OTP</label><input id="otp" placeholder="1234"></div>
+ <div class="actions"><button onclick="doVerify()">Kammala →</button><button class="secondary" onclick="show('register')">Komawa</button></div>
  </div>
 </section>
 <section id="login" class="screen">
- <div class="panel form-wrap"><h2>Shiga account</h2><p class="sub">Shiga don ganin dashboard na gwaji.</p>
- <div class="field"><label>Email ko lambar waya</label><input placeholder="Email / Phone"></div><div class="field" style="margin-top:13px"><label>Password</label><input type="password" placeholder="Password"></div>
- <div class="actions"><button onclick="show('dashboard')">Login Demo</button><button class="secondary" onclick="show('register')">Register</button></div>
+ <div class="panel form-wrap"><h2>Shiga account</h2><p class="sub">Idan kai Admin ne, saka email naka na musamman.</p>
+ <div class="field"><label>Email ko lambar waya</label><input id="lEmail" placeholder="Email / Phone"></div><div class="field" style="margin-top:13px"><label>Password</label><input id="lPass" type="password" placeholder="Password"></div>
+ <div class="actions"><button onclick="doLogin()">Login</button><button class="secondary" onclick="show('register')">Register</button></div>
  </div>
 </section>
 <section id="dashboard" class="screen">
- <div class="topline"><div><div class="tag">User dashboard</div><h2>Maraba, Haruna 👋</h2><p class="sub">Ga taƙaitaccen bayanan ajiyarka.</p></div><button class="secondary" onclick="show('home')">Logout</button></div>
- <div class="stats"><div class="stat"><small>Jimillar ajiya</small><strong>₦120,000</strong></div><div class="stat"><small>Balance</small><strong>₦35,000</strong></div><div class="stat"><small>Jimillar aro</small><strong>₦0</strong></div><div class="stat"><small>Referral bonus</small><strong>₦2,000</strong></div></div>
- <div class="panel"><div class="topline"><h3>Katin ajiyar wata — kwanaki 31</h3><span class="badge">12 / 31 sun cika</span></div><p class="sub">Misalin yadda za a nuna ci gaban ajiyar ku.</p><div class="days" id="userDays"></div></div>
- <div class="stats"><div class="stat"><small>History</small><strong>12</strong><small>Rikodin ajiya</small></div><div class="stat"><small>Withdrawals</small><strong>0</strong><small>Buƙatun cire kuɗi</small></div><div class="stat"><small>Referrals</small><strong>4</strong><small>Mutanen da ka gayyata</small></div><div class="stat"><small>Account</small><strong>Active</strong><small>Demo status</small></div></div>
- <div class="actions"><button onclick="alert('Demo kawai: ba a aika buƙatar kuɗi ba.')">Nemi cire kuɗi</button><button class="secondary" onclick="alert('Demo kawai: za a nuna tarihin biyan kuɗi a nan.')">Payment history</button><button class="secondary" onclick="alert('Demo referral code: ADA-HARUNA')">Referral link</button></div>
+ <div class="topline"><div><div class="tag">User dashboard</div><h2 id="dashName">Maraba 👋</h2><p class="sub" id="dashEmail"></p></div><button class="secondary" onclick="doLogout()">Logout</button></div>
+ <div class="stats"><div class="stat"><small>Jimillar ajiya</small><strong>₦0</strong></div><div class="stat"><small>Balance</small><strong>₦0</strong></div><div class="stat"><small>Jimillar aro</small><strong>₦0</strong></div><div class="stat"><small>Referral bonus</small><strong>₦0</strong></div></div>
+ <div class="panel"><div class="topline"><h3>Katin ajiyar wata — kwanaki 31</h3><span class="badge">0 / 31</span></div><div class="days" id="userDays"></div></div>
+ <div class="actions"><button onclick="alert('Demo: ba a aika buƙatar kuɗi ba.')">Nemi cire kuɗi</button><button class="secondary" onclick="alert('Demo referral: ADA-'+document.getElementById('dashName').innerText)">Referral link</button></div>
 </section>
 <section id="admin" class="screen">
- <div class="topline"><div><div class="tag">Admin area • Demo only</div><h2>Admin Dashboard</h2><p class="sub">Misalin yadda mai gudanarwa zai duba bayanan masu amfani.</p></div><button class="secondary" onclick="show('home')">Komawa gida</button></div>
- <div class="stats"><div class="stat"><small>Masu amfani</small><strong>248</strong></div><div class="stat"><small>Accounts active</small><strong>231</strong></div><div class="stat"><small>Pending review</small><strong>12</strong></div><div class="stat"><small>Suspended</small><strong>5</strong></div></div>
+ <div class="topline"><div><div class="tag">Admin area • Kai kaɗai</div><h2>Admin Dashboard</h2><p class="sub">Maraba Admin — harounmkkfinancialservices@gmail.com</p></div><button class="secondary" onclick="doLogout()">Logout</button></div>
+ <div class="stats"><div class="stat"><small>Masu amfani</small><strong id="adminCount">0</strong></div><div class="stat"><small>Accounts active</small><strong id="adminActive">0</strong></div><div class="stat"><small>Pending review</small><strong>0</strong></div><div class="stat"><small>Suspended</small><strong>0</strong></div></div>
  <div class="admin-layout"><aside class="sidebar"><h3>ADASHE ADMIN</h3><p>Overview</p><p>Users</p><p>Savings</p><p>Withdrawals</p><p>Reports</p><p>Settings</p></aside>
  <div class="panel"><div class="topline"><h3>Jerin masu amfani</h3><input style="max-width:230px" placeholder="Nemo user..." oninput="filterUsers(this.value)"></div>
- <div class="table-wrap"><table><thead><tr><th>Suna</th><th>Waya</th><th>Ajiyar kuɗi</th><th>Status</th><th>Duba</th></tr></thead><tbody id="users">
- <tr class="user-row"><td>Haruna Musa</td><td>080****123</td><td>₦120,000</td><td><span class="badge">Active</span></td><td><button onclick="userDetails('Haruna Musa','080****123','₦120,000','Active')">View</button></td></tr>
- <tr class="user-row"><td>Amina Bello</td><td>080****456</td><td>₦85,000</td><td><span class="badge pending">Pending</span></td><td><button onclick="userDetails('Amina Bello','080****456','₦85,000','Pending')">View</button></td></tr>
- <tr class="user-row"><td>Usman Ali</td><td>080****789</td><td>₦40,000</td><td><span class="badge suspended">Suspended</span></td><td><button onclick="userDetails('Usman Ali','080****789','₦40,000','Suspended')">View</button></td></tr>
- </tbody></table></div>
- <div id="details" class="notice" style="display:none"><b>Bayani:</b><p id="detailText"></p><p>Tsaro: Admin ba zai iya ganin password ko PIN na mai amfani ba. Ainihin reset sai ta hanyar amintaccen hanyar tabbatar da mai account.</p><div class="actions"><button onclick="alert('Demo: an nuna hanyar aika reset link kawai.')">Request password reset</button><button class="secondary" onclick="alert('Demo: an rubuta aikin a audit log.')">Suspend / Review</button></div></div>
+ <div class="table-wrap"><table><thead><tr><th>Suna</th><th>Waya</th><th>Email</th><th>Status</th></tr></thead><tbody id="users"></tbody></table></div>
  </div></div>
- <div class="notice">Muhimmi: wannan admin dashboard na gwaji ne da bayanan ƙirƙira. Ba shi da kariyar admin ta gaske, ba ya canza account, kuma bai haɗu da bayanan kuɗi ba.</div>
 </section>
 </main>
-<footer>ADASHE • Website preview / demo only • Ba a haɗa biyan kuɗi ko ainihin asusun masu amfani ba.</footer>
+<footer>ADASHE • Demo only • <span style="color:#eee;cursor:pointer" onclick="show('login')">.</span></footer>
 <script>
+const ADMIN_EMAIL="harounmkkfinancialservices@gmail.com";
+const ADMIN_PASS="Haroun2026";
+let clicks=0;
+function logoClick(){clicks++;setTimeout(()=>clicks=0,1500);if(clicks>=3){alert("Admin Login: saka email naka na musamman");show('login');clicks=0}}
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-function fillDays(target,done){let el=document.getElementById(target);for(let i=1;i<=31;i++){let b=document.createElement(target==='miniDays'?'span':'button');b.textContent=i;if(i<=done)b.classList.add('done');if(i===13&&target!=='miniDays')b.classList.add('today');if(target!=='miniDays')b.onclick=()=>alert('Ranar '+i+' — demo');el.appendChild(b)}}
-fillDays('miniDays',9);fillDays('userDays',12);
-function userDetails(n,p,s,st){document.getElementById('details').style.display='block';document.getElementById('detailText').textContent='Suna: '+n+' | Waya: '+p+' | Ajiya: '+s+' | Status: '+st;document.getElementById('details').scrollIntoView({behavior:'smooth',block:'nearest'})}
+function getUsers(){try{return JSON.parse(localStorage.getItem('adashe_users')||'[]')}catch(e){return[]}}
+function saveUsers(u){localStorage.setItem('adashe_users',JSON.stringify(u))}
+function fillDays(target,done){let el=document.getElementById(target);el.innerHTML='';for(let i=1;i<=31;i++){let b=document.createElement(target==='miniDays'?'span':'button');b.textContent=i;if(i<=done)b.classList.add('done');el.appendChild(b)}}
+fillDays('miniDays',9);fillDays('userDays',0);
+function doRegister(){
+ let f=document.getElementById('rFirst').value.trim(),l=document.getElementById('rLast').value.trim(),p=document.getElementById('rPhone').value.trim(),e=document.getElementById('rEmail').value.trim().toLowerCase(),pw=document.getElementById('rPass').value,pw2=document.getElementById('rPass2').value;
+ if(!f||!l||!p||!e||!pw){alert("Cika duk bayanan");return}
+ if(pw!==pw2){alert("Password bai zo daya ba");return}
+ if(e===ADMIN_EMAIL){alert("Wannan email na Admin ne, ba a iya amfani dashi");return}
+ let users=getUsers(); if(users.find(u=>u.email===e)){alert("An riga an yi register da wannan email");show('login');return}
+ users.push({name:f+" "+l,first:f,phone:p,email:e,pass:pw,status:"Active",date:new Date().toLocaleDateString()});
+ saveUsers(users); localStorage.setItem('adashe_pending',JSON.stringify({name:f+" "+l,email:e,phone:p}));
+ show('verify');
+}
+function doVerify(){
+ if(document.getElementById('otp').value!=="1234"){alert("OTP na gwaji shine 1234");return}
+ let pend=JSON.parse(localStorage.getItem('adashe_pending')||'{}');
+ document.getElementById('dashName').innerText="Maraba, "+pend.name+" 👋";
+ document.getElementById('dashEmail').innerText=pend.email+" • "+pend.phone;
+ fillDays('userDays',0); show('dashboard');
+}
+function doLogin(){
+ let e=document.getElementById('lEmail').value.trim().toLowerCase(),pw=document.getElementById('lPass').value;
+ if(e===ADMIN_EMAIL && pw===ADMIN_PASS){ renderAdmin(); show('admin'); return }
+ if(e===ADMIN_EMAIL){alert("Password na Admin ba daidai ba");return}
+ let users=getUsers(); let u=users.find(x=>(x.email===e||x.phone===e)&&x.pass===pw);
+ if(!u){alert("Email/Password ba daidai ba, ko ba a yi register ba. Ka yi Register da farko.");return}
+ document.getElementById('dashName').innerText="Maraba, "+u.name+" 👋";
+ document.getElementById('dashEmail').innerText=u.email+" • "+u.phone;
+ fillDays('userDays',0); show('dashboard');
+}
+function renderAdmin(){
+ let users=getUsers(); document.getElementById('adminCount').innerText=users.length; document.getElementById('adminActive').innerText=users.length;
+ let tbody=document.getElementById('users'); tbody.innerHTML='';
+ if(users.length===0){tbody.innerHTML='<tr><td colspan="4">Babu user tukuna. Idan mutum ya yi register, zai bayyana anan.</td></tr>';return}
+ users.forEach(u=>{tbody.innerHTML+='<tr><td>'+u.name+'</td><td>'+u.phone+'</td><td>'+u.email+'</td><td><span class="badge">'+u.status+'</span></td></tr>'});
+}
 function filterUsers(q){document.querySelectorAll('#users tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q.toLowerCase())?'':'none')}
+function doLogout(){show('home')}
 </script>
 </body></html>
