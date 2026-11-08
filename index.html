@@ -3,139 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ADASHE — Savings Platform Demo</title>
+<title>SmartSavings - Ajiya Mai Wayo</title>
 <style>
-:root{--green:#087b55;--deep:#07543d;--mint:#e9f7f0;--gold:#e8b84b;--ink:#17251f;--muted:#718078;--line:#e5eee8;--bg:#f5f8f6;--white:#fff;--red:#c94b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Helvetica,sans-serif;color:var(--ink)}
-header{background:linear-gradient(115deg,var(--deep),#0c8b61);color:white;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{font-size:25px;font-weight:900;letter-spacing:2px;cursor:pointer}.brand span{color:#f5d17a}
-nav{display:flex;gap:8px;flex-wrap:wrap}button,.btn{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer;background:var(--green);color:white}
-button.secondary{background:white;color:var(--deep);border:1px solid #dce9e1}button.gold{background:var(--gold);color:#35280b}
-.hero{padding:55px 6%;background:linear-gradient(120deg,#e7f6ed,#f8fbf8);display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center}
-.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.08;margin:8px 0 14px}.hero p{font-size:17px;color:#52645a;line-height:1.6}.tag{color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:1.5px;font-size:12px}
-.preview-card{background:white;padding:22px;border-radius:22px;box-shadow:0 18px 50px #123b251a;border:1px solid var(--line)}
-.preview-card h3{margin:0 0 14px}.mini-grid,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:7px}
-.mini-grid span,.days button{background:var(--mint);border-radius:9px;padding:12px 2px;text-align:center;color:var(--deep);font-weight:800}
-main{max-width:1160px;margin:28px auto;padding:0 18px}.screen{display:none}.screen.active{display:block}
-.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 28px #163d2410}
-.form-wrap{max-width:620px;margin:25px auto}.form-wrap h2{margin:0 0 7px}.sub{color:var(--muted);line-height:1.5;margin-top:0}
-.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#43564b}input,select{width:100%;padding:13px;border:1px solid #dce7df;border-radius:10px;font-size:15px;background:#fff}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.notice{background:#fff8e6;border:1px solid #f2dfaa;color:#70551a;padding:12px;border-radius:10px;font-size:13px;line-height:1.5;margin:15px 0}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.stat{background:white;padding:18px;border-radius:15px;border:1px solid var(--line)}.stat small{color:var(--muted)}.stat strong{display:block;font-size:25px;margin-top:8px;color:var(--deep)}
-.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.days button{border:0;cursor:pointer}.days button.done{background:#c8edda}.days button.today{background:var(--gold);color:#382b0b}
-.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:620px}th,td{text-align:left;padding:13px;border-bottom:1px solid var(--line);font-size:14px}th{color:var(--muted);font-size:12px;text-transform:uppercase}.badge{display:inline-block;padding:5px 9px;border-radius:20px;background:#e5f6ec;color:#08744d;font-size:12px;font-weight:800}.badge.pending{background:#fff3d7;color:#8a6411}.badge.suspended{background:#fde8e8;color:#a83232}
-.admin-layout{display:grid;grid-template-columns:220px 1fr;gap:18px}.sidebar{background:var(--deep);color:white;border-radius:16px;padding:20px}.sidebar p{padding:10px;border-radius:8px;background:#ffffff12}.user-row{cursor:pointer}.user-row:hover{background:#f3faf5}
-footer{text-align:center;color:var(--muted);padding:28px;font-size:12px}
-@media(max-width:760px){.hero{grid-template-columns:1fr;padding:35px 6%}.stats{grid-template-columns:1fr 1fr}.admin-layout{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.days{gap:4px}.days button{padding:9px 0;font-size:12px}}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#f0f2f5}
+.header{background:#fff;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.logo{font-size:22px;font-weight:900;color:#0a2a5e}
+.logo span{color:#00a884}
+.btn{padding:10px 18px;border:none;border-radius:20px;cursor:pointer;font-weight:700}
+.btn-blue{background:#1a56db;color:#fff}
+.btn-green{background:#00a884;color:#fff}
+.btn-white{background:#fff;color:#333;border:1px solid #ddd}
+.card{background:#fff;border-radius:15px;padding:20px;margin:15px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.wallet{background:linear-gradient(135deg,#1a56db,#3b82f6);color:#fff;border-radius:20px;padding:20px;margin:15px}
+.wallet small{opacity:.8}
+.wallet h1{font-size:32px;margin:10px 0}
+.acc-box{background:rgba(255,255,255,.15);border-radius:12px;padding:12px;margin-top:15px}
+.acc-box b{font-size:22px;letter-spacing:1px}
+input{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;margin:8px 0}
+.hidden{display:none}
+.flex{display:flex;gap:10px}
+.flex .btn{flex:1}
+.service-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;margin-top:15px;text-align:center}
+.service-grid div{background:#f8f9ff;padding:12px;border-radius:12px;font-size:13px;cursor:pointer}
+.tag{background:#ffed4d;color:#000;padding:2px 8px;border-radius:10px;font-size:11px}
 </style>
 </head>
 <body>
-<header>
- <div class="brand" id="logo" onclick="logoClick()">ADA<span>SHE</span></div>
- <nav>
-  <button class="secondary" onclick="show('home')">Gida</button>
-  <button class="secondary" onclick="show('register')">Register</button>
-  <button class="secondary" onclick="show('login')">Login</button>
- </nav>
-</header>
-<section id="home" class="screen active">
- <div class="hero">
-  <div><div class="tag">Ajiya cikin sauƙi • Savings made simple</div>
-   <h1>Ajiye kuɗinka cikin tsari.</h1>
-   <p>ADASHE yana taimaka maka ka bibiyi ajiyarka ta kwanaki 31 a kowane wata.</p>
-   <div class="actions"><button onclick="show('register')">Buɗe Account</button><button class="secondary" onclick="show('login')">Shiga Account</button></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo">smart<span>savings</span></div>
+  <div id="topBtns">
+    <button class="btn btn-white" onclick="show('login')">Login</button>
+    <button class="btn btn-blue" onclick="show('register')">Register</button>
   </div>
-  <div class="preview-card"><h3>Katin ajiyar kwanaki 31</h3><div class="mini-grid" id="miniDays"></div><p class="sub">Ka duba ajiyarka a wuri guda.</p></div>
- </div>
- <main><div class="stats"><div class="stat"><small>Tsarin ajiya</small><strong>31 days</strong></div><div class="stat"><small>Harsuna</small><strong>HA / EN</strong></div><div class="stat"><small>Na'urori</small><strong>Mobile</strong></div><div class="stat"><small>Yanayi</small><strong>Demo</strong></div></div></main>
-</section>
-<main>
-<section id="register" class="screen">
- <div class="panel form-wrap"><div class="tag">Mataki na 1 / 2</div><h2>Ƙirƙiri sabon account</h2><p class="sub">Cika bayananka domin buɗe asusun gwaji.</p>
- <div class="fields">
-  <div class="field"><label>Sunan Ƙarshe</label><input id="rLast" placeholder="Misali: Musa"></div>
-  <div class="field"><label>Sunan Farko</label><input id="rFirst" placeholder="Misali: Haruna"></div>
-  <div class="field"><label>Lambar waya</label><input id="rPhone" placeholder="080..."></div>
-  <div class="field"><label>Email</label><input id="rEmail" type="email" placeholder="name@example.com"></div>
-  <div class="field"><label>Password</label><input id="rPass" type="password" placeholder="Ƙirƙiri password"></div>
-  <div class="field"><label>Tabbatar da Password</label><input id="rPass2" type="password" placeholder="Sake rubuta password"></div>
- </div>
- <div class="notice">Wannan demo ne: kada ka saka ainihin password, NIN, ko bayanan sirri.</div>
- <div class="actions"><button onclick="doRegister()">Next →</button><button class="secondary" onclick="show('login')">Ina da account</button></div>
- </div>
-</section>
-<section id="verify" class="screen">
- <div class="panel form-wrap"><div class="tag">Mataki na 2 / 2</div><h2>Tabbatar da bayanai</h2><p class="sub">Shigar da OTP na gwaji: <b>1234</b></p>
- <div class="field"><label>Lambar OTP</label><input id="otp" placeholder="1234"></div>
- <div class="actions"><button onclick="doVerify()">Kammala →</button><button class="secondary" onclick="show('register')">Komawa</button></div>
- </div>
-</section>
-<section id="login" class="screen">
- <div class="panel form-wrap"><h2>Shiga account</h2><p class="sub">Idan kai Admin ne, saka email naka na musamman.</p>
- <div class="field"><label>Email ko lambar waya</label><input id="lEmail" placeholder="Email / Phone"></div><div class="field" style="margin-top:13px"><label>Password</label><input id="lPass" type="password" placeholder="Password"></div>
- <div class="actions"><button onclick="doLogin()">Login</button><button class="secondary" onclick="show('register')">Register</button></div>
- </div>
-</section>
-<section id="dashboard" class="screen">
- <div class="topline"><div><div class="tag">User dashboard</div><h2 id="dashName">Maraba 👋</h2><p class="sub" id="dashEmail"></p></div><button class="secondary" onclick="doLogout()">Logout</button></div>
- <div class="stats"><div class="stat"><small>Jimillar ajiya</small><strong>₦0</strong></div><div class="stat"><small>Balance</small><strong>₦0</strong></div><div class="stat"><small>Jimillar aro</small><strong>₦0</strong></div><div class="stat"><small>Referral bonus</small><strong>₦0</strong></div></div>
- <div class="panel"><div class="topline"><h3>Katin ajiyar wata — kwanaki 31</h3><span class="badge">0 / 31</span></div><div class="days" id="userDays"></div></div>
- <div class="actions"><button onclick="alert('Demo: ba a aika buƙatar kuɗi ba.')">Nemi cire kuɗi</button><button class="secondary" onclick="alert('Demo referral: ADA-'+document.getElementById('dashName').innerText)">Referral link</button></div>
-</section>
-<section id="admin" class="screen">
- <div class="topline"><div><div class="tag">Admin area • Kai kaɗai</div><h2>Admin Dashboard</h2><p class="sub">Maraba Admin — harounmkkfinancialservices@gmail.com</p></div><button class="secondary" onclick="doLogout()">Logout</button></div>
- <div class="stats"><div class="stat"><small>Masu amfani</small><strong id="adminCount">0</strong></div><div class="stat"><small>Accounts active</small><strong id="adminActive">0</strong></div><div class="stat"><small>Pending review</small><strong>0</strong></div><div class="stat"><small>Suspended</small><strong>0</strong></div></div>
- <div class="admin-layout"><aside class="sidebar"><h3>ADASHE ADMIN</h3><p>Overview</p><p>Users</p><p>Savings</p><p>Withdrawals</p><p>Reports</p><p>Settings</p></aside>
- <div class="panel"><div class="topline"><h3>Jerin masu amfani</h3><input style="max-width:230px" placeholder="Nemo user..." oninput="filterUsers(this.value)"></div>
- <div class="table-wrap"><table><thead><tr><th>Suna</th><th>Waya</th><th>Email</th><th>Status</th></tr></thead><tbody id="users"></tbody></table></div>
- </div></div>
-</section>
-</main>
-<footer>ADASHE • Demo only • <span style="color:#eee;cursor:pointer" onclick="show('login')">.</span></footer>
+  <div id="topUser" class="hidden"><b id="helloName"></b> <button class="btn btn-white" onclick="logout()">Logout</button></div>
+</div>
+
+<!-- HOME -->
+<div id="page-home">
+  <div class="card" style="text-align:center;padding:40px 20px">
+    <h1 style="color:#0a2a5e">Ajiya Mai Wayo,<br>Rayuwa Mai Sauki.</h1>
+    <p style="margin:15px 0;color:#666">Yi register, ka samu Account Number naka, ka rika ajiya da transfer kamar Palmpay.</p>
+    <button class="btn btn-blue" onclick="show('register')">Fara Ajiya Yanzu</button>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div id="page-register" class="hidden">
+  <div class="card">
+    <h2>Create Account</h2>
+    <p style="font-size:13px;color:#666">Za a ba ka Account Number naka na daban bayan register.</p>
+    <input id="regName" placeholder="Cikakken Suna - misali Haruna Muhammad Sabiu">
+    <input id="regPhone" placeholder="Phone - 09068255421">
+    <input id="regEmail" placeholder="Email">
+    <input id="regPass" type="password" placeholder="Password">
+    <button class="btn btn-blue" style="width:100%" onclick="doRegister()">Register - Samu Account Number Na</button>
+    <p style="text-align:center;margin-top:10px;font-size:13px">Kana da account? <a href="#" onclick="show('login')">Login</a></p>
+  </div>
+</div>
+
+<!-- LOGIN -->
+<div id="page-login" class="hidden">
+  <div class="card">
+    <h2>Login</h2>
+    <input id="logEmail" placeholder="Email">
+    <input id="logPass" type="password" placeholder="Password">
+    <button class="btn btn-blue" style="width:100%" onclick="doLogin()">Login</button>
+    <p style="font-size:12px;color:#888;margin-top:10px">Admin: harounmkkfinancialservices@gmail.com / 1234</p>
+  </div>
+</div>
+
+<!-- DASHBOARD - KAMAR HOTON NAKA -->
+<div id="page-dash" class="hidden">
+  <div style="padding:10px 15px"><b>Good morning,</b><br><b id="dashName" style="font-size:20px">Haruna</b></div>
+
+  <div class="wallet">
+    <small>WALLET BALANCE 👁️</small>
+    <h1>₦<span id="balance">0.00</span></h1>
+    <div style="background:rgba(255,255,255,.2);display:inline-block;padding:5px 10px;border-radius:20px;font-size:12px">✦ Referral cashback ₦0.00</div>
+
+    <div class="acc-box">
+      <div style="display:flex;justify-content:space-between">
+        <span>🏦 <b id="bankName">Palmpay</b><br><small id="accName" style="font-size:12px;opacity:.8">Haruna Muhammad Sabiu</small></span>
+        <span style="font-size:12px">Funding charge: ₦0</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+        <b id="accNumber">6641493607</b>
+        <button onclick="copyAcc()" style="background:rgba(255,255,255,.2);border:none;color:#fff;padding:8px 12px;border-radius:8px;cursor:pointer">📋 Copy</button>
+      </div>
+      <p style="font-size:12px;margin-top:8px;opacity:.8">Yi transfer zuwa wannan account number din, kudi zai shigo nan kai tsaye.</p>
+    </div>
+
+    <div class="flex" style="margin-top:15px">
+      <button class="btn" style="background:#fff;color:#1a56db" onclick="fundWallet()">+ Fund Wallet</button>
+      <button class="btn" style="background:rgba(255,255,255,.2);color:#fff" onclick="alert('Referral Link: smartsavings.com/ref/'+currentUser.phone)">👥 Referrals</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Services</h3>
+    <div class="service-grid">
+      <div onclick="saveMoney()">💰<br>Ajiya</div>
+      <div onclick="withdraw()">💸<br>Cire Kudi</div>
+      <div onclick="alert('Data da Airtime nan gaba kadan')">📶<br>Data</div>
+      <div onclick="alert('Za ka ga tarihin ajiyar ka')">📜<br>History</div>
+    </div>
+    <div style="margin-top:20px">
+      <h4>Ajiya ta (31 Days)</h4>
+      <p style="font-size:13px">Yau: Rana <b id="dayNum">1</b> / 31</p>
+      <div style="background:#eee;height:10px;border-radius:10px;margin:10px 0"><div id="progress" style="background:#00a884;height:10px;width:3%;border-radius:10px"></div></div>
+      <input id="saveAmt" type="number" placeholder="Nawa zaka ajiye? misali 1000">
+      <button class="btn btn-green" style="width:100%" onclick="saveMoney()">Ajiye Yanzu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="page-admin" class="hidden">
+  <div class="card">
+    <h2>Admin - Duk Users</h2>
+    <div id="userList"></div>
+    <button class="btn btn-white" onclick="show('dash')">Koma Dashboard</button>
+  </div>
+</div>
+
 <script>
-const ADMIN_EMAIL="harounmkkfinancialservices@gmail.com";
-const ADMIN_PASS="Haroun2026";
-let clicks=0;
-function logoClick(){clicks++;setTimeout(()=>clicks=0,1500);if(clicks>=3){alert("Admin Login: saka email naka na musamman");show('login');clicks=0}}
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
-function getUsers(){try{return JSON.parse(localStorage.getItem('adashe_users')||'[]')}catch(e){return[]}}
-function saveUsers(u){localStorage.setItem('adashe_users',JSON.stringify(u))}
-function fillDays(target,done){let el=document.getElementById(target);el.innerHTML='';for(let i=1;i<=31;i++){let b=document.createElement(target==='miniDays'?'span':'button');b.textContent=i;if(i<=done)b.classList.add('done');el.appendChild(b)}}
-fillDays('miniDays',9);fillDays('userDays',0);
+let users = JSON.parse(localStorage.getItem('smart_users')||'[]');
+let currentUser = null;
+
+function show(p){
+  ['home','register','login','dash','admin'].forEach(x=>document.getElementById('page-'+x).classList.add('hidden'));
+  document.getElementById('page-'+p).classList.remove('hidden');
+  if(p==='admin') renderAdmin();
+}
+function copyAcc(){ navigator.clipboard.writeText(document.getElementById('accNumber').innerText); alert('An kwafa Account Number: '+document.getElementById('accNumber').innerText); }
+
+// KIRKIRAR VIRTUAL ACCOUNT GA KOWANE USER - KAMAR PALMPAY
+function createVirtualAccount(name){
+  let num = "66" + Math.floor(10000000 + Math.random()*89999999);
+  return { bank:"Palmpay", number:num, name:name };
+}
+
 function doRegister(){
- let f=document.getElementById('rFirst').value.trim(),l=document.getElementById('rLast').value.trim(),p=document.getElementById('rPhone').value.trim(),e=document.getElementById('rEmail').value.trim().toLowerCase(),pw=document.getElementById('rPass').value,pw2=document.getElementById('rPass2').value;
- if(!f||!l||!p||!e||!pw){alert("Cika duk bayanan");return}
- if(pw!==pw2){alert("Password bai zo daya ba");return}
- if(e===ADMIN_EMAIL){alert("Wannan email na Admin ne, ba a iya amfani dashi");return}
- let users=getUsers(); if(users.find(u=>u.email===e)){alert("An riga an yi register da wannan email");show('login');return}
- users.push({name:f+" "+l,first:f,phone:p,email:e,pass:pw,status:"Active",date:new Date().toLocaleDateString()});
- saveUsers(users); localStorage.setItem('adashe_pending',JSON.stringify({name:f+" "+l,email:e,phone:p}));
- show('verify');
+  let name=document.getElementById('regName').value;
+  let phone=document.getElementById('regPhone').value;
+  let email=document.getElementById('regEmail').value;
+  let pass=document.getElementById('regPass').value;
+  if(!name||!phone||!email||!pass) return alert('Cika komai!');
+  if(users.find(u=>u.email===email)) return alert('Wannan email an yi register da shi');
+  let acc = createVirtualAccount(name);
+  let user={name,phone,email,pass,balance:0,day:1,acc:acc};
+  users.push(user); localStorage.setItem('smart_users',JSON.stringify(users));
+  alert('Barka da zuwa '+name+'! Account Number naka shine: '+acc.number+' ('+acc.bank+')');
+  currentUser=user; openDash();
 }
-function doVerify(){
- if(document.getElementById('otp').value!=="1234"){alert("OTP na gwaji shine 1234");return}
- let pend=JSON.parse(localStorage.getItem('adashe_pending')||'{}');
- document.getElementById('dashName').innerText="Maraba, "+pend.name+" 👋";
- document.getElementById('dashEmail').innerText=pend.email+" • "+pend.phone;
- fillDays('userDays',0); show('dashboard');
-}
+
 function doLogin(){
- let e=document.getElementById('lEmail').value.trim().toLowerCase(),pw=document.getElementById('lPass').value;
- if(e===ADMIN_EMAIL && pw===ADMIN_PASS){ renderAdmin(); show('admin'); return }
- if(e===ADMIN_EMAIL){alert("Password na Admin ba daidai ba");return}
- let users=getUsers(); let u=users.find(x=>(x.email===e||x.phone===e)&&x.pass===pw);
- if(!u){alert("Email/Password ba daidai ba, ko ba a yi register ba. Ka yi Register da farko.");return}
- document.getElementById('dashName').innerText="Maraba, "+u.name+" 👋";
- document.getElementById('dashEmail').innerText=u.email+" • "+u.phone;
- fillDays('userDays',0); show('dashboard');
+  let email=document.getElementById('logEmail').value;
+  let pass=document.getElementById('logPass').value;
+  if(email==='harounmkkfinancialservices@gmail.com' && pass==='1234'){
+    show('admin'); return;
+  }
+  let u=users.find(x=>x.email===email && x.pass===pass);
+  if(!u) return alert('Email ko Password ba daidai ba');
+  currentUser=u; openDash();
 }
+
+function openDash(){
+  document.getElementById('topBtns').classList.add('hidden');
+  document.getElementById('topUser').classList.remove('hidden');
+  document.getElementById('helloName').innerText=currentUser.name;
+  document.getElementById('dashName').innerText=currentUser.name;
+  document.getElementById('balance').innerText=currentUser.balance.toLocaleString()+'.00';
+  document.getElementById('bankName').innerText=currentUser.acc.bank;
+  document.getElementById('accName').innerText=currentUser.acc.name;
+  document.getElementById('accNumber').innerText=currentUser.acc.number;
+  document.getElementById('dayNum').innerText=currentUser.day;
+  document.getElementById('progress').style.width=(currentUser.day/31*100)+'%';
+  show('dash');
+}
+
+function saveMoney(){
+  let amt=parseInt(document.getElementById('saveAmt').value||0);
+  if(!amt) amt=1000;
+  currentUser.balance+=amt; currentUser.day=Math.min(31,currentUser.day+1);
+  saveUsers(); openDash(); alert('Ka ajiye ₦'+amt+'! Balance dinka yanzu ₦'+currentUser.balance);
+}
+function fundWallet(){
+  let amt=prompt('Nawa zaka yi transfer zuwa account number dinka?');
+  if(!amt) return;
+  currentUser.balance+=parseInt(amt); saveUsers(); openDash();
+  alert('An karbi ₦'+amt+' daga '+currentUser.acc.number+'! Balance ya karu.');
+}
+function withdraw(){
+  let amt=prompt('Nawa zaka cire? Balance: '+currentUser.balance);
+  if(!amt) return;
+  if(parseInt(amt)>currentUser.balance) return alert('Kudi bai isa ba');
+  currentUser.balance-=parseInt(amt); saveUsers(); openDash(); alert('An tura maka ₦'+amt);
+}
+function saveUsers(){ let i=users.findIndex(u=>u.email===currentUser.email); users[i]=currentUser; localStorage.setItem('smart_users',JSON.stringify(users)); }
 function renderAdmin(){
- let users=getUsers(); document.getElementById('adminCount').innerText=users.length; document.getElementById('adminActive').innerText=users.length;
- let tbody=document.getElementById('users'); tbody.innerHTML='';
- if(users.length===0){tbody.innerHTML='<tr><td colspan="4">Babu user tukuna. Idan mutum ya yi register, zai bayyana anan.</td></tr>';return}
- users.forEach(u=>{tbody.innerHTML+='<tr><td>'+u.name+'</td><td>'+u.phone+'</td><td>'+u.email+'</td><td><span class="badge">'+u.status+'</span></td></tr>'});
+  let html='';
+  users.forEach(u=>{ html+=`<div style="border:1px solid #eee;padding:10px;border-radius:10px;margin:8px 0"><b>${u.name}</b> - ${u.phone}<br>Bank: ${u.acc.bank} | Acc: <b>${u.acc.number}</b><br>Balance: ₦${u.balance} | Rana: ${u.day}/31</div>` });
+  document.getElementById('userList').innerHTML=html||'Babu user tukuna';
 }
-function filterUsers(q){document.querySelectorAll('#users tr').forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q.toLowerCase())?'':'none')}
-function doLogout(){show('home')}
+function logout(){ currentUser=null; document.getElementById('topBtns').classList.remove('hidden'); document.getElementById('topUser').classList.add('hidden'); show('home'); }
 </script>
-</body></html>
+</body>
+</html>
